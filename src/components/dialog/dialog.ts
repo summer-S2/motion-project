@@ -1,9 +1,27 @@
-import { BaseComponent, Component } from "../component.js";
+import { BaseComponent, Component } from "./../component.js";
 import { Composable } from "../page/page.js";
 
 type OnCloseListener = () => void;
 type OnSubmitListener = () => void;
 
+export interface MediaData {
+  readonly title: string;
+  readonly url: string;
+}
+
+export interface TextData {
+  readonly title: string;
+  readonly body: string;
+}
+
+/**
+ * InputDialog -
+ *
+ * addChild 함수를 통해 내부 컨텐츠를 외부에서 결정할 수 있고,
+ * 버튼이 눌러졌을때 어떤 동작을 수행할지도 외부에서 받아옴
+ *
+ * 재사용성이 높다!
+ */
 export class InputDialog
   extends BaseComponent<HTMLElement>
   implements Composable
@@ -14,7 +32,7 @@ export class InputDialog
   constructor() {
     super(`
     <dialog class="dialog">
-      <div class='dialog__container>
+      <div class='dialog__container'>
         <button class="close">&times;</button>
         <div id="dialog__body"></div>
         <button class="dialog__submit">ADD</button>
